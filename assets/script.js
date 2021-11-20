@@ -76,15 +76,24 @@ function generatePassword(userparams) {
   var length = userparams.length;
   var pwParams = userparams.pwParams;
 
-  // random string variables
-  var alphabeticLower = 'abcdefghijklmnopqrstuvwxyz';
-  var alphabeticUpper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  var numeric = '0123456789'
-  var special = ' !\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
-  // var full_chars = alphabeticLower + alphabeticUpper + numeric + special;
+  // create various string object
+  var stringContainer = {}
+  stringContainer.lower = 'abcdefghijklmnopqrstuvwxyz';
+  stringContainer.upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  stringContainer.numeric = '0123456789'
+  stringContainer.special = ' !\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
 
-  // generate random password based on user input
+  // determine string inclusion
+  var stringSet = '';
 
+  for (param in pwParams) {
+    if (pwParams[param] === true){
+      stringSet += stringContainer[param];
+    }
+  }
+
+  // generate random password
+  var password = '';
 
 
   // // generate random password

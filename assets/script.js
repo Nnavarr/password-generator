@@ -1,6 +1,3 @@
-// Assignment code here
-
-
 // function to receive user input
 function userInput(){
 
@@ -20,34 +17,65 @@ function userInput(){
       length = parseInt(window.prompt('Please enter a valid length (8 - 128)'));
     } 
 
-    // user input for special characters
-    var specialCharacters = window.prompt('Would you like special characters? (yes or no) \n\ Default: yes \n\  Special Characters Include: Space, !, ", #, $, etc.');
+    // Various parameters for the randomly generated password
+    // lowercase alphabetic
+    var lowerCase = window.prompt('lower case alphabetic? (yes or no) \n\ Defailt: yes');
+    lowerCase = lowerCase.trim().toLowerCase();
+
+    // uppercase alphabetic
+    var upperCase = window.prompt('upper case alphabetic? (yes or no) \n\ Defailt: yes');
+    upperCase = upperCase.trim().toLowerCase();
+
+    // numeric
+    var numericVals = window.prompt('numeric values? (yes or no) \n\ Defailt: yes');
+    numericVals = numericVals.trim().toLowerCase();
+
+    // special characters
+    var specialCharacters = window.prompt('Would you like special characters? (yes or no) \n\ Default: yes \n\  Special Characters Include:Space, !, ", #, $, etc.');
     specialCharacters = specialCharacters.trim().toLowerCase();
 
-    return {
-      length,
-      specialCharacters
-    };
+    // create pw param object
+    var pwParams = {};
+    pwParams.lower = lowerCase;
+    pwParams.upper = upperCase;
+    pwParams.numeric = numericVals;
+    pwParams.special = specialCharacters;
+
+    return {length, pwParams};
 }
 
 function generatePassword(userparams) {
 
   // read in user parameters for desired password
   var length = userparams.length;
-  var specialChars = userparams.specialCharacters;
+  var pwParams = userparams.pwParams;
 
   // random string variables
-  var alphabetic = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-  var special = '!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
-  var full_chars = alphabetic + special;
+  var alphabeticLower = 'abcdefghijklmnopqrstuvwxyz';
+  var alphabeticUpper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  var numeric = '0123456789'
+  var special = ' !\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
+  // var full_chars = alphabeticLower + alphabeticUpper + numeric + special;
 
   // generate random password
   var password = ''
-  for (var i = 0; i < length; i++){
-    password += full_chars.charAt(Math.floor(Math.random() * full_chars.length));
+  switch(specialChars) {
+    // special characters case
+    case 'yes':
+      for (var i = 0; i < length; i++){
+        password += full_chars.charAt(Math.floor(Math.random() * full_chars.length));
+      }
+    // alphabetic characters case
+    default:
+      for (var i = 0; i < length; i++){
+        password += alphabetic.charAt(Math.floor(Math.random() * alphabetic.length));
+      }
   }
-}
 
+  // update value of text area with the newly generated password
+  document.getElementById('password').value = password;
+
+}
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -55,26 +83,9 @@ var generateBtn = document.querySelector("#generate");
 // Write password to the #password input
 function writePassword() {
   var settings  = userInput();
-  var password = generatePassword(settings);
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
+  generatePassword(settings);
+  document.querySelector("#password").value;
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-
-/*
-PseudoCode
-----------
-0. Create link to 'Generate Password' button
-    i. When Clicked, bring a pop up of raido dials 
-      a. Would you like a Special Length? 
-      b. Would you like Special Characters? 
-
-1. Look for the input on said radio dials
-2. Based on the inputs generate a random password.
-
-*/

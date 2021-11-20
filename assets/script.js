@@ -31,16 +31,21 @@ function userInput(){
 }
 
 function generatePassword(userparams) {
-  
+
   // read in user parameters for desired password
   var length = userparams.length;
   var specialChars = userparams.specialCharacters;
 
   // random string variables
   var alphabetic = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  var special = '!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
+  var full_chars = alphabetic + special;
 
-
-  // validate user input and generate password
+  // generate random password
+  var password = ''
+  for (var i = 0; i < length; i++){
+    password += full_chars.charAt(Math.floor(Math.random() * full_chars.length));
+  }
 }
 
 

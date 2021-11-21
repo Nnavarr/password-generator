@@ -45,15 +45,15 @@ function userInput() {
 
   // Various parameters for the randomly generated password
   // lowercase alphabetic
-  var lowerCase = window.prompt('lower case alphabetic? (yes or no) \n\ Defailt: yes');
+  var lowerCase = window.prompt('lower case alphabetic? (yes or no) \n\ Default: yes');
   lowerCase = formatResponse(lowerCase);
 
   // uppercase alphabetic
-  var upperCase = window.prompt('upper case alphabetic? (yes or no) \n\ Defailt: yes');
+  var upperCase = window.prompt('upper case alphabetic? (yes or no) \n\ Default: yes');
   upperCase = formatResponse(upperCase);
 
   // numeric
-  var numericVals = window.prompt('numeric values? (yes or no) \n\ Defailt: yes');
+  var numericVals = window.prompt('numeric values? (yes or no) \n\ Default: yes');
   numericVals = formatResponse(numericVals);
 
   // special characters

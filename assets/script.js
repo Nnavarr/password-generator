@@ -1,4 +1,4 @@
-// function to receive user input
+// function to format user input
 function formatResponse(userResponse) {
   /*
   Author: Noe Navarro
@@ -18,6 +18,7 @@ function formatResponse(userResponse) {
   return response;
 }
 
+// function to receive user input
 function userInput() {
   /* 
   Author: Noe Navarro
@@ -26,7 +27,6 @@ function userInput() {
     Receive user input on various parameters for the randomly generated password
   return: password length, userinput object containing lowercase, uppercase, numeric, special settings
   */
-
   //  user input for password length
   var lengthCustom = window.prompt('Would you like to customize the length? (yes or no) \n\ Default: 10');
   lengthCustom = lengthCustom.trim();
@@ -71,7 +71,15 @@ function userInput() {
 }
 
 function generatePassword(userparams) {
-
+  /*
+  Author: Noe Navarro
+  Date: 11/20/21
+  Objective: 
+    Take user input and generate random password.
+  
+  param1: userparams ; output of 'userInput()'
+  return: randomly generated string, displayed within text area (#password)
+  */
   // read in user parameters for desired password
   var length = userparams.length;
   var pwParams = userparams.pwParams;
@@ -85,7 +93,6 @@ function generatePassword(userparams) {
 
   // determine string inclusion
   var stringSet = '';
-
   for (param in pwParams) {
     if (pwParams[param] === true){
       stringSet += stringContainer[param];
@@ -94,22 +101,9 @@ function generatePassword(userparams) {
 
   // generate random password
   var password = '';
-
-
-  // // generate random password
-  // var password = ''
-  // switch(specialChars) {
-  //   // special characters case
-  //   case 'yes':
-  //     for (var i = 0; i < length; i++){
-  //       password += full_chars.charAt(Math.floor(Math.random() * full_chars.length));
-  //     }
-  //   // alphabetic characters case
-  //   default:
-  //     for (var i = 0; i < length; i++){
-  //       password += alphabetic.charAt(Math.floor(Math.random() * alphabetic.length));
-  //     }
-  // }
+  for (var i = 0; i < length; i++){
+    password += stringSet.charAt(Math.floor(Math.random() * stringSet.length));
+  }
 
   // update value of text area with the newly generated password
   document.getElementById('password').value = password;
